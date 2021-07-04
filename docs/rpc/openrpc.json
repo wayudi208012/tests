@@ -1,0 +1,126 @@
+{
+  "openrpc": "1.0.0-rc1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Petstore",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://localhost:8545"
+    }
+  ],
+  "methods": [
+    {
+      "name": "test_setChainParams",
+      "summary": "Set up the initial state for a test",
+      "tags": [
+        {
+          "name": "test"
+        }
+      ],
+      "params": [
+        {
+          "name": "params",
+          "description": "The initial state",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/chainParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "pets",
+        "description": "A paged array of pets",
+        "schema": {
+          "$ref": "#/components/schemas/Pets"
+        }
+      },
+      "errors": [
+        {
+          "code": 100,
+          "message": "pets busy"
+        }
+      ],
+      "examples": [
+        {
+          "name": "listPetExample",
+          "description": "List pet example",
+          "params": [
+            {
+              "name": "limit",
+              "value": 1
+            }
+          ],
+          "result": {
+            "name": "listPetResultExample",
+            "value": [
+              {
+                "id": 7,
+                "name": "fluffy",
+                "tag": "poodle"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "contentDescriptors": {
+      "forkBlock": {
+        "name": "forkBlock",
+        "required": true,
+        "description": "The block number in which the chain changes forks",
+        "schema": {
+          "$ref": "#/components/schemas/forkBlock"
+        }
+      }
+    },
+    "schemas": {
+      "chainParams": {
+        "type": "object",
+        "required": [
+          "chainID"
+        ],
+        "properties": {
+          "chainID": {
+            "type": "string"
+          },
+          "homesteadForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "EIP150ForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "EIP158ForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "byzantiumForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "constantinopleForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "constantinopleFixForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },          
+          "istanbulForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "berlinForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          },
+          "londonForkBlock": {
+              "$ref": "#/components/schemas/forkBlock"
+          }
+        },
+        "schema": {
+          "$ref": "#/components/schemas/chainParams"
+        }        
+      }
+    }
+  }
+}
